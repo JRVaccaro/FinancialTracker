@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FinancialTracker {
-
-    private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private static final String FILE_NAME = "transactions.csv";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String TIME_FORMAT = "HH:mm:ss";
@@ -15,7 +14,8 @@ public class FinancialTracker {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
     public static void main(String[] args) {
-        loadTransactions(FILE_NAME);
+
+        loadTransactions("transactions.csv");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
