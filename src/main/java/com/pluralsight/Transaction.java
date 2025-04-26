@@ -4,18 +4,18 @@ import java.time.LocalDate;
 
 public class Transaction {
     //Fields
-private LocalDate date;
-private String time;
-private String description;
-String Vendor;
-double amount;
+    private LocalDate date;
+    private String time;
+    private String description;
+    private String vendor;
+    private double amount;
 
     //Constructor
     public Transaction(LocalDate date, String time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.description = description;
-        Vendor = vendor;
+        this.vendor = vendor;
         this.amount = amount;
     }
     // Getters and Setters
@@ -44,11 +44,11 @@ double amount;
     }
 
     public String getVendor() {
-        return Vendor;
+        return vendor;
     }
 
     public void setVendor(String vendor) {
-        Vendor = vendor;
+        this.vendor = vendor;
     }
 
     public double getAmount() {
