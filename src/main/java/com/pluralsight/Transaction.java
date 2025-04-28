@@ -1,29 +1,28 @@
 package com.pluralsight;
 
-import java.time.LocalDate;
-
 public class Transaction {
-    //Fields
-    private LocalDate date;
+    // Fields
+    private String date;         // now a String
     private String time;
     private String description;
     private String vendor;
     private double amount;
 
-    //Constructor
-    public Transaction(LocalDate date, String time, String description, String vendor, double amount) {
+    // Constructor
+    public Transaction(String date, String time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
     }
+
     // Getters and Setters
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

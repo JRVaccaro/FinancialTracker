@@ -15,7 +15,13 @@ public class FinancialTracker {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
     public static void main(String[] args) {
-        loadTransactions("transactions.csv");
+
+        ArrayList<Transaction> transactions = getTransactions();
+
+        Collections.sort(transactions, Comparator.comparing(Transaction::getTransactions));
+
+        listAllTransactions(Transaction);
+
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -51,7 +57,7 @@ public class FinancialTracker {
         scanner.close();
     }
 
-    public static void loadTransactions(String fileName) {
+    public static ArrayList<Transaction> loadTransactions(String fileName) {
         String line;
 
       // if statement for seeing if file exists/ creating one?
@@ -63,7 +69,7 @@ public class FinancialTracker {
                 String[] parts = line.split("\\|"); //splits the line by '|', delimiter
 
                 //parse data, time, description, vendor, and amount from the line
-                LocalDate date = LocalDate.parse(parts[0]);
+                String date = parts[0];
                 String time = parts[1];
                 String description = parts[2];
                 String vendor = parts[3];
@@ -78,7 +84,7 @@ public class FinancialTracker {
             System.out.println("Error has occurred!");
             e.printStackTrace();
         }
-        // need to close the file here?
+        return transactions;
 
 
         // This method should load transactions from a file with the given file name.
