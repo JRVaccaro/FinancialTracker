@@ -1,12 +1,13 @@
 package com.pluralsight;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class FinancialTracker {
-    ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private static final String FILE_NAME = "transactions.csv";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String TIME_FORMAT = "HH:mm:ss";
@@ -14,7 +15,6 @@ public class FinancialTracker {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
     public static void main(String[] args) {
-
         loadTransactions("transactions.csv");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -52,8 +52,37 @@ public class FinancialTracker {
     }
 
     public static void loadTransactions(String fileName) {
+        String line;
+
+      // if statement for seeing if file exists/ creating one?
+
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fileName)); //opens the file to read
+            while ((line = br.readLine()) != null) { //reads the file line by line
+                String[] parts = line.split("\\|"); //splits the line by '|', delimiter
+
+                //parse data, time, description, vendor, and amount from the line
+                LocalDate date = LocalDate.parse(parts[0]);
+                String time = parts[1];
+                String description = parts[2];
+                String vendor = parts[3];
+                double amount = Double.parseDouble(parts[4]);
+
+                // creates a new transaction and adds to the transaction list
+                transactions.add(new Transaction(date, time, description, vendor, amount));
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error has occurred!");
+            e.printStackTrace();
+        }
+        // need to close the file here?
+
+
         // This method should load transactions from a file with the given file name.
-        // If the file does not exist, it should be created.
+        // If the file does not exist, it should be created.??? if statement maybe???
         // The transactions should be stored in the `transactions` ArrayList.
         // Each line of the file represents a single transaction in the following format:
         // <date>|<time>|<description>|<vendor>|<amount>
@@ -184,4 +213,5 @@ public class FinancialTracker {
         // Transactions with a matching vendor name are printed to the console.
         // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
     }
+
 }
