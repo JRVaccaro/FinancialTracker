@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -15,12 +16,10 @@ public class FinancialTracker {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
 
     public static void main(String[] args) {
+        transactions = loadTransactions(FILE_NAME); //Loads transactions from the file
 
-        ArrayList<Transaction> transactions = getTransactions();
+        Collections.sort(transactions, Comparator.comparing(Transaction::getDate)); //sorts transactions by date
 
-        Collections.sort(transactions, Comparator.comparing(Transaction::getTransactions));
-
-        listAllTransactions(Transaction);
 
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -56,39 +55,43 @@ public class FinancialTracker {
 
         scanner.close();
     }
-
+    // method to load transactions from a file and return them as a list
     public static ArrayList<Transaction> loadTransactions(String fileName) {
         String line;
-
-      // if statement for seeing if file exists/ creating one?
-
+        ArrayList<Transaction> transactions = new ArrayList<>(); // list to store loaded transactions
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName)); //opens the file to read
             while ((line = br.readLine()) != null) { //reads the file line by line
                 String[] parts = line.split("\\|"); //splits the line by '|', delimiter
 
-                //parse data, time, description, vendor, and amount from the line
-                String date = parts[0];
-                String time = parts[1];
-                String description = parts[2];
-                String vendor = parts[3];
-                double amount = Double.parseDouble(parts[4]);
+                String dateString = parts[0]; // extract date as aString
+                String timeString = parts[1]; // extract time as a String
+                String description = parts[2]; // extract the transaction description
+                String vendor = parts[3]; // extract vendor name
+                double amount = Double.parseDouble(parts[4]); // parse amount as a double
+
+
+                //parsing date and time Strings into LocalDate and LocalTime objects.
+                LocalDate date = LocalDate.parse(dateString, DATE_FORMATTER);
+                LocalTime time = LocalTime.parse(timeString, TIME_FORMATTER);
+
 
                 // creates a new transaction and adds to the transaction list
                 transactions.add(new Transaction(date, time, description, vendor, amount));
 
             }
+            br.close(); //closing reader after loop
 
         } catch (Exception e) {
-            System.out.println("Error has occurred!");
+            System.out.println("Error has occurred!"); //if any errors happen, print message
             e.printStackTrace();
-        }
-        return transactions;
 
+
+        }
+        return transactions; // return list of transactions loaded from file
 
         // This method should load transactions from a file with the given file name.
-        // If the file does not exist, it should be created.??? if statement maybe???
         // The transactions should be stored in the `transactions` ArrayList.
         // Each line of the file represents a single transaction in the following format:
         // <date>|<time>|<description>|<vendor>|<amount>
@@ -96,6 +99,7 @@ public class FinancialTracker {
         // After reading all the transactions, the file should be closed.
         // If any errors occur, an appropriate error message should be displayed.
     }
+
 
     private static void addDeposit(Scanner scanner) {
         // This method should prompt the user to enter the date, time, description, vendor, and amount of a deposit.
