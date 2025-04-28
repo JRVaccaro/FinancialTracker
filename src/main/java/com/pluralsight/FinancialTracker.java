@@ -65,16 +65,12 @@ public class FinancialTracker {
             while ((line = br.readLine()) != null) { //reads the file line by line
                 String[] parts = line.split("\\|"); //splits the line by '|', delimiter
 
-                String dateString = parts[0]; // extract date as aString
-                String timeString = parts[1]; // extract time as a String
+                LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER); // parse date string using custom formatter
+                LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER); // parse time using custom formatter
                 String description = parts[2]; // extract the transaction description
                 String vendor = parts[3]; // extract vendor name
                 double amount = Double.parseDouble(parts[4]); // parse amount as a double
 
-
-                //parsing date and time Strings into LocalDate and LocalTime objects.
-                LocalDate date = LocalDate.parse(dateString, DATE_FORMATTER);
-                LocalTime time = LocalTime.parse(timeString, TIME_FORMATTER);
 
 
                 // creates a new transaction and adds to the transaction list
@@ -102,6 +98,7 @@ public class FinancialTracker {
 
 
     private static void addDeposit(Scanner scanner) {
+        Scanner input = new Scanner(System.in);
         // This method should prompt the user to enter the date, time, description, vendor, and amount of a deposit.
         // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
         // The amount should be a positive number.
