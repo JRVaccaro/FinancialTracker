@@ -114,7 +114,7 @@ public class FinancialTracker {
            String vendor = scanner.nextLine().trim(); //reads vendor
 
            System.out.println("Enter the amount: ");
-           double amount = Double.parseDouble(scanner.nextLine().trim());
+           double amount = Double.parseDouble(scanner.nextLine().trim()); //reading line of input as a string
 
            if (amount <= 0) { //number must be positive
                System.out.println("Error, amount must be positive.");
@@ -166,7 +166,7 @@ public class FinancialTracker {
 
        } catch (Exception e) {
            System.out.println("Invalid. Try again!");
-
+           e.printStackTrace();
        }
         // This method should prompt the user to enter the date, time, description, vendor, and amount of a payment.
         // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
@@ -213,25 +213,53 @@ public class FinancialTracker {
     //Method displays all transactions from the list in a formatted table
     private static void displayLedger() {
 
-        //Prints header row with colum titles and fixed-wdth formatting
-        System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        //Prints header row with colum titles and fixed-width formatting
+        try {
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n", "Date", "Time", "Description", "Vendor", "Amount");
 
-        //Divider line underneath headers
-        System.out.println("---------------------------------------------------------------------------------------------");
+            //Divider line underneath headers
+            System.out.println("---------------------------------------------------------------------------------------------");
 
-        //Loop through each transaction and print details in the same formatting
-        for (Transaction transaction : transactions) {
-            System.out.printf("%-12s | %-10s | %-30s | %-20s | %10.2f\n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            //Loop through each transaction and print details in the same formatting
+            for (Transaction transaction : transactions) {
+                //Using getters to retrieve the private variables in Transaction class
+                System.out.printf("%-12s | %-10s | %-30s | %-20s | %10.2f\n",
+                        transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         // This method should display a table of all transactions in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
     }
 
     private static void displayDeposits() {
-        // This method should display a table of all deposits in the `transactions` ArrayList.
-        // The table should have columns for date, time, description, vendor, and amount.
-    }
+        try {
+            //Prints header row with colum titles and fixed-width formatting
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n", "Date", "Time", "Description", "Vendor", "Amount");
 
+            System.out.println("---------------------------------------------------------------------------------------------");
+
+            //loop through each transaction in the list
+            for (Transaction transaction : transactions) {
+                if (transaction.getAmount() > 0) {
+                    //Using getters to retrieve the private variables in Transaction class
+                    System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n",
+                            transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                }
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error has occurred while displaying deposits.");
+            e.printStackTrace();
+
+
+            // This method should display a table of all deposits in the `transactions` ArrayList.
+            // The table should have columns for date, time, description, vendor, and amount.
+
+        }
+    }
     private static void displayPayments() {
         // This method should display a table of all payments in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
