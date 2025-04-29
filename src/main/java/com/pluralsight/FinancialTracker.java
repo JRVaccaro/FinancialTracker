@@ -98,8 +98,35 @@ public class FinancialTracker {
 
 
     private static void addDeposit(Scanner scanner) {
-        Scanner input = new Scanner(System.in);
-        // This method should prompt the user to enter the date, time, description, vendor, and amount of a deposit.
+       try {
+
+           System.out.println("Enter the date and time in the following format: (yyyy-MM-dd HH:mm:ss):");
+           String dateTimeInput = scanner.nextLine().trim();
+
+           String[] parts =dateTimeInput.split(" ");
+           LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER); // parse date string using custom formatter
+           LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);// parse time using custom formatter
+
+           System.out.println("Enter the description: ");
+           String description = scanner.nextLine().trim(); //reads description
+
+           System.out.println("Enter the vendor: ");
+           String vendor = scanner.nextLine().trim(); //reads vendor
+
+           System.out.println("Enter the amount: ");
+           double amount = Double.parseDouble(scanner.nextLine().trim());
+
+           if (amount <= 0) {
+               System.out.println("Error, amount must be positive.");
+               return; //exit method
+           }
+           Transaction newDeposit = new Transaction(date, time, description, vendor, amount); //creating a new transaction object and add to list
+           transactions.add(newDeposit);
+           System.out.println("Deposit added successfully!");
+
+       } catch (Exception e) {
+           System.out.println("Invalid. Try again!");
+       }   // This method should prompt the user to enter the date, time, description, vendor, and amount of a deposit.
         // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
         // The amount should be a positive number.
         // After validating the input, a new `Transaction` object should be created with the entered values.
@@ -119,7 +146,7 @@ public class FinancialTracker {
         while (running) {
             System.out.println("Ledger");
             System.out.println("Choose an option:");
-            System.out.println("A) A`ll");
+            System.out.println("A) All");
             System.out.println("D) Deposits");
             System.out.println("P) Payments");
             System.out.println("R) Reports");
