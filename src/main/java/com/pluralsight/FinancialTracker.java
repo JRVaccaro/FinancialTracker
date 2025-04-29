@@ -203,14 +203,26 @@ public class FinancialTracker {
                     break;
                 case "H":
                     running = false;
+                    break;
                 default:
                     System.out.println("Invalid option");
                     break;
             }
         }
     }
-
+    //Method displays all transactions from the list in a formatted table
     private static void displayLedger() {
+
+        //Prints header row with colum titles and fixed-wdth formatting
+        System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+
+        //Divider line underneath headers
+        System.out.println("---------------------------------------------------------------------------------------------");
+
+        //Loop through each transaction and print details in the same formatting
+        for (Transaction transaction : transactions) {
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | %10.2f\n", transaction.getDate(), transaction.getTime(), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+        }
         // This method should display a table of all transactions in the `transactions` ArrayList.
         // The table should have columns for date, time, description, vendor, and amount.
     }
