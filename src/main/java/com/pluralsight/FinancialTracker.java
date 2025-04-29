@@ -101,9 +101,9 @@ public class FinancialTracker {
        try {
 
            System.out.println("Enter the date and time in the following format: (yyyy-MM-dd HH:mm:ss):");
-           String dateTimeInput = scanner.nextLine().trim();
+           String dateTimeInput = scanner.nextLine().trim(); //read and trims the input
 
-           String[] parts =dateTimeInput.split(" ");
+           String[] parts = dateTimeInput.split(" "); //splits the input  into date and time parts
            LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER); // parse date string using custom formatter
            LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);// parse time using custom formatter
 
@@ -116,12 +116,12 @@ public class FinancialTracker {
            System.out.println("Enter the amount: ");
            double amount = Double.parseDouble(scanner.nextLine().trim());
 
-           if (amount <= 0) {
+           if (amount <= 0) { //number must be positive
                System.out.println("Error, amount must be positive.");
                return; //exit method
            }
-           Transaction newDeposit = new Transaction(date, time, description, vendor, amount); //creating a new transaction object and add to list
-           transactions.add(newDeposit);
+           Transaction newDeposit = new Transaction(date, time, description, vendor, amount); //creating a new transaction object
+           transactions.add(newDeposit); //adds the transaction to the list
            System.out.println("Deposit added successfully!");
 
        } catch (Exception e) {
@@ -134,6 +134,40 @@ public class FinancialTracker {
     }
 
     private static void addPayment(Scanner scanner) {
+       try {
+
+        System.out.println("Please enter the date and time in the following format: (yyyy-MM-dd HH:mm:ss)");
+        String dateTimeInput2 = scanner.nextLine().trim(); //read and trims the input
+
+        String[] parts = dateTimeInput2.split(" "); //splits the input into date and time parts
+        LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER); // parse date string using custom formatter
+        LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);// parse time using custom formatter
+
+        System.out.println("Enter the description:  ");
+        String description = scanner.nextLine().trim(); //reads description
+
+        System.out.println("Enter the vendor: ");
+        String vendor = scanner.nextLine().trim(); //reads vendor
+
+        System.out.println("Enter the amount: ");
+        double amount = Double.parseDouble(scanner.nextLine().trim());//reads amount
+
+        if (amount <= 0) { //checks to see if amount is positive
+            System.out.println("Amount must be a positive. Please try again.");
+            return;
+        }else{
+            amount = amount *-1; //changes to negative since it's a payment
+        }
+
+           Transaction newPayment = new Transaction(date, time, description, vendor, amount); //creating a new transaction object
+           transactions.add(newPayment); //adds the transaction to the list
+           System.out.println("Payment added successfully!");
+
+
+       } catch (Exception e) {
+           System.out.println("Invalid. Try again!");
+
+       }
         // This method should prompt the user to enter the date, time, description, vendor, and amount of a payment.
         // The user should enter the date and time in the following format: yyyy-MM-dd HH:mm:ss
         // The amount received should be a positive number then transformed to a negative number.
