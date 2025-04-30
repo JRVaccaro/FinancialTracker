@@ -318,29 +318,48 @@ public class FinancialTracker {
 
                   //Gets today's date at the end of range
                   LocalDate endDate = LocalDate.now();
+
                     //Filters and prints transactions that occurred from start of month to end.
                     filterTransactionsByDate(startDate, endDate);
+
                     break;
                     // Generate a report for all transactions within the current month,
                     // including the date, time, description, vendor, and amount for each transaction.
                 case "2":
-                    //First day of previous month, counting backwards
+                    //Gets first day of previous month
                     LocalDate startOfPreviousMonth = LocalDate.now().minusMonths(1).withDayOfMonth(1);
 
-                    //Gets day of previous month by adding one month to the first day,then subtracts one day.
+                    //Gets last day of previous month by adding one month to the first day,then subtracts one day.
                     LocalDate endOfPreviousMonth = startOfPreviousMonth.plusMonths(1).minusDays(1);
+
+                    //Filters and prints transactions that occurred in the previous month
                     filterTransactionsByDate(startOfPreviousMonth, endOfPreviousMonth);
                     break;
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
                 case "3":
-                    filterTransactionsByDate();
+                    //Gets first day of current year
+                    LocalDate startOfYear = LocalDate.now().withDayOfYear(1);
+
+                    //Gets date at the end of range
+                    LocalDate endOfYear = LocalDate.now();
+
+                    //Filters and prints transactions that occurred from start of year to today
+                    filterTransactionsByDate(startOfYear, endOfYear);
+
                     break;
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
 
                 case "4":
-                    filterTransactionsByDate();
+                    //Gets first day of previous year
+                    LocalDate startOfPreviousYear = LocalDate.now().minusYears(1).withDayOfYear(1);
+
+                    //Gets last day of previous year by adding one year to the first day, then subtracts one day
+                    LocalDate endOfPreviousYear = startOfPreviousYear.plusYears(1).minusDays(1);
+
+                    //Filters and prints transactions that occurred in the previous year
+                    filterTransactionsByDate(startOfPreviousYear,endOfPreviousYear);
                     break;
                     // Generate a report for all transactions within the previous year,
                     // including the date, time, description, vendor, and amount for each transaction.
