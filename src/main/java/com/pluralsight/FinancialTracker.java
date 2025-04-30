@@ -1,7 +1,9 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -12,8 +14,8 @@ public class FinancialTracker {
     private static final String FILE_NAME = "transactions.csv";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String TIME_FORMAT = "HH:mm:ss";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT); //changed to public so i can access it in my Transaction class for toString
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);//changed to public so i can access it in my Transaction class for toString
 
     public static void main(String[] args) {
         transactions = loadTransactions(FILE_NAME); //Loads transactions from the file
@@ -61,7 +63,7 @@ public class FinancialTracker {
         ArrayList<Transaction> transactions = new ArrayList<>(); // list to store loaded transactions
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName)); //opens the file to read
+            BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));//opens the file to read
             while ((line = br.readLine()) != null) { //reads the file line by line
                 String[] parts = line.split("\\|"); //splits the line by '|', delimiter
 
@@ -98,7 +100,7 @@ public class FinancialTracker {
 
 
     private static void addDeposit(Scanner scanner) {
-       try {
+       try { BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true)); //By adding true it keeps existing data and puts new transaction at the bottom
 
            System.out.println("Enter the date and time in the following format: (yyyy-MM-dd HH:mm:ss):");
            String dateTimeInput = scanner.nextLine().trim(); //read and trims the input
@@ -123,6 +125,12 @@ public class FinancialTracker {
            Transaction newDeposit = new Transaction(date, time, description, vendor, amount); //creating a new transaction object
            transactions.add(newDeposit); //adds the transaction to the list
            System.out.println("Deposit added successfully!");
+
+        String line = newDeposit.toString(); //call toString method on the newDeposit
+        writer.write(line); //writes the transaction line to the file
+        writer.newLine(); // clearing line
+
+           writer.close(); //closes writer
 
        } catch (Exception e) {
            System.out.println("Invalid. Try again!");

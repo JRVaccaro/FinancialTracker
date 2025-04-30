@@ -3,6 +3,9 @@ package com.pluralsight;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import static com.pluralsight.FinancialTracker.DATE_FORMATTER;
+import static com.pluralsight.FinancialTracker.TIME_FORMATTER;
+
 public class Transaction {
     // Fields
     private LocalDate date;
@@ -58,5 +61,10 @@ public class Transaction {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return date.format(DATE_FORMATTER) + "|" + time.format(TIME_FORMATTER) + "|" + description + "|" + vendor + "|" + amount;
     }
 }
