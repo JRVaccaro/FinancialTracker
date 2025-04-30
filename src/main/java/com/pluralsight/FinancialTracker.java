@@ -172,7 +172,7 @@ public class FinancialTracker {
            System.out.println("Payment added successfully!");
 
            String line = newPayment.toString(); //call toString method on the newPayment
-           writer.write(line); //writes the transaction line to the file
+           writer.write(line); //writes the string of the current transaction
            writer.newLine(); // clearing line
 
            writer.close(); //closes writer
