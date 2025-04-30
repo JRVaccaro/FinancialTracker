@@ -3,7 +3,6 @@
 ## Description of the Project
 
 Financial Tracker is a Java console application that helps users manage their personal finances. Users can add deposits, make payments, view transaction history through a ledger, and generate simple reports. It's designed for individuals who want a lightweight way to track their income and expenses without a complex interface.
-![Class Diagram](path/to/your/class_diagram.png)
 
 ## User Stories
 
@@ -18,8 +17,16 @@ Financial Tracker is a Java console application that helps users manage their pe
 
 
 ## Setup
-
-Instructions on how to set up and run the project using IntelliJ IDEA.
+**Using the Application**
+You will be prompted to pick from the following:
+D) Add Deposit
+P) Make Payment (Debit)
+L) Ledger
+X) Exit
+- Adding a deposit allows user to record money being added to their account.
+- Adding a payment allows user to record money being spent or withdrawn.
+- The ledger will open a submenu where users can view and filter their transaction history
+- Exit will allow users to close the application
 
 ### Prerequisites
 
@@ -34,7 +41,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 2. Select "Open" and navigate to the directory where you cloned or downloaded the project.
 3. After the project opens, wait for IntelliJ to index the files and set up the project.
 4. Find the main class with the `public static void main(String[] args)` method.
-5. Right-click on the file and select 'Run 'YourMainClassName.main()'' to start the application.
+5. Right-click on the file and select 'Run 'FinancialTracker.main()'' to start the application.
 
 ## Technologies Used
 
@@ -46,7 +53,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
 
 ![Application Screenshot](path/to/your/screenshot.png)
-
+![](C:\Users\julia\OneDrive\Desktop\Screen 2.png)
 ## Future Work
 
 Outline potential future enhancements or functionalities you might consider adding:
@@ -56,10 +63,7 @@ Outline potential future enhancements or functionalities you might consider addi
 ## Resources
 - https://www.geeksforgeeks.org/
 - https://stackoverflow.com/questions
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
+- https://github.com/RayMaroun
 
 ## Author
 - **Julianna Vaccaro** -Developed this project as part of Java programming course to practice file handling, user input, and menu-driven applications.
