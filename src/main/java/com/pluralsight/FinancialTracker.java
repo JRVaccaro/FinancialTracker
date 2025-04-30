@@ -142,7 +142,7 @@ public class FinancialTracker {
     }
 
     private static void addPayment(Scanner scanner) {
-       try {
+       try { BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true)); //By adding true it keeps existing data and puts new transaction at the bottom
 
         System.out.println("Please enter the date and time in the following format: (yyyy-MM-dd HH:mm:ss)");
         String dateTimeInput2 = scanner.nextLine().trim(); //read and trims the input
@@ -161,7 +161,7 @@ public class FinancialTracker {
         double amount = Double.parseDouble(scanner.nextLine().trim());//reads amount
 
         if (amount <= 0) { //checks to see if amount is positive
-            System.out.println("Amount must be a positive. Please try again.");
+            System.out.println("Amount must be a positive.");
             return;
         }else{
             amount = amount *-1; //changes to negative since it's a payment
@@ -171,9 +171,15 @@ public class FinancialTracker {
            transactions.add(newPayment); //adds the transaction to the list
            System.out.println("Payment added successfully!");
 
+           String line = newPayment.toString(); //call toString method on the newPayment
+           writer.write(line); //writes the transaction line to the file
+           writer.newLine(); // clearing line
+
+           writer.close(); //closes writer
+
 
        } catch (Exception e) {
-           System.out.println("Invalid. Try again!");
+           System.out.println("Invalid input.");
            e.printStackTrace();
        }
         // This method should prompt the user to enter the date, time, description, vendor, and amount of a payment.
