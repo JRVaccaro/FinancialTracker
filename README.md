@@ -2,20 +2,16 @@
 
 ## Description of the Project
 
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
-
+Financial Tracker is a Java console application that helps users manage their personal finances. Users can add deposits, make payments, view transaction history through a ledger, and generate simple reports. It's designed for individuals who want a lightweight way to track their income and expenses without a complex interface.
 ![Class Diagram](path/to/your/class_diagram.png)
 
 ## User Stories
 
-
-
 - As a user, I want to see a main menu with clear options, so that I know what actions I can take.
 - As a user, I want to see an option to add a deposit in the menu, so that I can record money added to my account.
 - As a user, I want to see an option to make a payment in the menu, so that I can record money spent or withdrawn.
-- As a user, I want to see an option to view the ledger in the menu, so that I can check my transaction history.
 - As a user, I want to access reports from the ledger, so that I can run summaries and searches.
-- As a user, I want to have an exit option in the menu so I can close the application when I’m finished.
+- As a user, I want to have an exit option in the menu, so I can close the application when I’m finished.
 
 
 
@@ -42,8 +38,8 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java 17
+- Intellij IDEA
 
 ## Demo
 
@@ -55,8 +51,7 @@ Include screenshots or GIFs that show your application in action. Use tools like
 
 Outline potential future enhancements or functionalities you might consider adding:
 
-- Additional feature to be developed.
-- Improvement of current functionalities.
+
 
 ## Resources
 - https://www.geeksforgeeks.org/
@@ -66,15 +61,11 @@ List resources such as tutorials, articles, or documentation that helped you dur
 - [Java Programming Tutorial](https://www.example.com)
 - [Effective Java](https://www.example.com)
 
-## Team Members
-
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+## Author
+- **Julianna Vaccaro** -Developed this project as part of Java programming course to practice file handling, user input, and menu-driven applications.
 
 ## Thanks
+- Thank you to my instructor, Raymond, for providing the skeleton code and for your continuous support and guidance throughout the project.
 
-Express gratitude towards those who provided help, guidance, or resources:
-
-- Thank you to my instructor, Raymond, for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+- Thank you to my peers for always being willing to listen and support me when I needed it.
  
