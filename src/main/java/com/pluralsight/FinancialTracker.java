@@ -261,15 +261,22 @@ public class FinancialTracker {
         }
     }
     private static void displayPayments() {
-        System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n", "Date", "Time", "Description", "Vendor", "Amount");
+        try {
+            //Prints header row with colum titles and fixed-width formatting
+            System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n", "Date", "Time", "Description", "Vendor", "Amount");
 
-        System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.println("---------------------------------------------------------------------------------------------");
 
-        for (Transaction transaction : transactions){
-            if (transaction.getAmount() < 0){
-                System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n",
-                        transaction.getDate(), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+            //loop through each transaction in the list
+            for (Transaction transaction : transactions){
+                if (transaction.getAmount() < 0){
+                    //Using getters to retrieve the private varibles in Transaction class
+                    System.out.printf("%-12s | %-10s | %-30s | %-20s | %10s\n",
+                            transaction.getDate(), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // This method should display a table of all payments in the `transactions` ArrayList.
@@ -292,19 +299,40 @@ public class FinancialTracker {
 
             switch (input) {
                 case "1":
+                    //Gets first day of current month
+                  LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+
+                  //Gets today's date at the end of range
+                  LocalDate endDate = LocalDate.now();
+                    //Filters and prints transactions that occurred from start of month to end.
+                    filterTransactionsByDate(startDate, endDate);
+                    break;
                     // Generate a report for all transactions within the current month,
                     // including the date, time, description, vendor, and amount for each transaction.
                 case "2":
+                    //First day of previous month, counting backwards
+                    LocalDate startOfPreviousMonth = LocalDate.now().minusMonths(1).withDayOfMonth(1);
+
+                    //Gets day of previous month by adding one month to the first day,then subtracts one day.
+                    LocalDate endOfPreviousMonth = startOfPreviousMonth.plusMonths(1).minusDays(1);
+                    filterTransactionsByDate(startOfPreviousMonth, endOfPreviousMonth);
+                    break;
                     // Generate a report for all transactions within the previous month,
                     // including the date, time, description, vendor, and amount for each transaction.
                 case "3":
+                    filterTransactionsByDate();
+                    break;
                     // Generate a report for all transactions within the current year,
                     // including the date, time, description, vendor, and amount for each transaction.
 
                 case "4":
+                    filterTransactionsByDate();
+                    break;
                     // Generate a report for all transactions within the previous year,
                     // including the date, time, description, vendor, and amount for each transaction.
                 case "5":
+                    filterTransactionsByVendor();
+                    break;
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, time, description, vendor, and amount for each transaction.
                 case "0":
@@ -318,12 +346,31 @@ public class FinancialTracker {
 
 
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-        // This method filters the transactions by date and prints a report to the console.
-        // It takes two parameters: startDate and endDate, which represent the range of dates to filter by.
-        // The method loops through the transactions list and checks each transaction's date against the date range.
-        // Transactions that fall within the date range are printed to the console.
-        // If no transactions fall within the date range, the method prints a message indicating that there are no results.
+        boolean results = false;
+        try {
+            for (Transaction transaction : transactions) {
+                LocalDate date = transaction.getDate();
+                // checks if transaction date is on or after start date and on or before the end date.
+                if ((date.isEqual(startDate) || date.isAfter(startDate)) && (date.isEqual(endDate) || date.isBefore(endDate))){
+                    System.out.println("Transaction Date: " + transaction.getDate() + " | Vendor: " + transaction.getVendor() + " | Amount: " + transaction.getAmount());
+                    results = true; // Found matching result
+                }
+            }
+                //if no transactions were found, print error
+                if (!results) {
+                    System.out.println("No transactions were found for given date range.");
+                }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    // This method filters the transactions by date and prints a report to the console.
+    // It takes two parameters: startDate and endDate, which represent the range of dates to filter by.
+    // The method loops through the transactions list and checks each transaction's date against the date range.
+    // Transactions that fall within the date range are printed to the console.
+    // If no transactions fall within the date range, the method prints a message indicating that there are no results
 
     private static void filterTransactionsByVendor(String vendor) {
         // This method filters the transactions by vendor and prints a report to the console.

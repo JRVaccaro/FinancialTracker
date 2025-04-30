@@ -59,7 +59,8 @@ Outline potential future enhancements or functionalities you might consider addi
 - Improvement of current functionalities.
 
 ## Resources
-
+- https://www.geeksforgeeks.org/
+- https://stackoverflow.com/questions
 List resources such as tutorials, articles, or documentation that helped you during the project.
 
 - [Java Programming Tutorial](https://www.example.com)
