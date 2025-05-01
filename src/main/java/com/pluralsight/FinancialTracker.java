@@ -283,6 +283,7 @@ public class FinancialTracker {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
+            System.out.println("6) Custom Search");
             System.out.println("0) Back");
 
             String input = scanner.nextLine().trim();
@@ -342,8 +343,15 @@ public class FinancialTracker {
                     filterTransactionsByVendor(vendor);
 
                     break;
+                case "6":
+                    //this will be for custom search
+                    customSearchMenu(scanner);
+                    break;
+
                 case "0":
                     running = false;
+                    break;
+
                 default:
                     System.out.println("Invalid option");
                     break;
@@ -393,10 +401,71 @@ public class FinancialTracker {
             }
             //if no transactions were found with given vendor name
             if (!results) {
-                System.out.println("No transactions were found for vendor:");
+                System.out.println("No transactions were found for vendor: " + vendor);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        private static void customSearchMenu (Scanner scanner){
+            boolean running = true;
+
+            while (running) {
+
+                System.out.println("Custom Search");
+                System.out.println("Choose an option:");
+                System.out.println("1) Search by Date Range");
+                System.out.println("2) Search by Vendor");
+                System.out.println("3) Search by Description");
+                System.out.println("4) Search by Amount");
+                System.out.println("0) Back");
+
+                String input = scanner.nextLine().trim();
+
+                switch (input) {
+                    case "1":
+
+                        break;
+
+                    case "2":
+                        System.out.println("Enter the Vendor Name:");
+                        String vendor = scanner.nextLine().trim(); //need to fix
+                        filterTransactionsByVendor(vendor);
+
+                        break;
+
+                    case "3":
+
+                        break;
+
+                    case "4":
+                        break;
+
+                    case "0":
+                        running = false;
+                        break;
+
+                    default:
+                        System.out.println("Invalid option");
+                        break;
+                }
+            }
+        }
+
+        private static void filterTransactionsByCustomSearch () {
+
+            //Checking if any results were found
+            boolean results = false;
+            try {
+                //Loop through all transactions in list
+                for (Transaction transaction : transactions) {
+                    if () {
+
+                    }
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+        }
     }
-}
