@@ -10,9 +10,9 @@ Financial Tracker is a Java console application that helps users manage their pe
 - As a user, I want to see an option to add a deposit in the menu, so that I can record money added to my account.
 - As a user, I want to see an option to make a payment in the menu, so that I can record money spent or withdrawn.
 - As a user, I want to access reports from the ledger, so that I can run summaries and searches.
+- As a user, I want to filter transactions by date, so that I can review activity during a selected period.
+- As a user, I want to search for transactions by vendor, so that I can quickly find related expenses or income.
 - As a user, I want to have an exit option in the menu, so I can close the application when I’m finished.
-
-
 
 
 
@@ -67,9 +67,10 @@ Follow these steps to get your application running within IntelliJ IDEA:
 ![screen 16.png](screen%2016.png)
 
 ## Future Work
-
-Outline potential future enhancements or functionalities you might consider adding:
-
+- Improve the visual design of the application to make it more user-friendly and snazzier-looking.
+- Add authentication, would like to include a login functionality to support multiple users.
+- Budgeting features, allow users to set budgets and get alerts when needed.
+- Mobile version, adapt the application for mobile platforms.
 
 
 ## Resources
