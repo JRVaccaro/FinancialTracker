@@ -407,7 +407,7 @@ public class FinancialTracker {
             e.printStackTrace();
         }
 
-        private static void customSearchMenu (Scanner scanner){
+        private static void customSearchMenu(Scanner scanner){
             boolean running = true;
 
             while (running) {
@@ -424,17 +424,31 @@ public class FinancialTracker {
 
                 switch (input) {
                     case "1":
+                        //Date range for custom search
+                        System.out.println("Enter the Start Date (yyyy-MM-dd): ");
+
+                        LocalDate startDate = LocalDate.parse(scanner.nextLine().trim());
+
+                        System.out.println("Enter the End Date (yyyy-MM-dd): ");
+
+                        LocalDate endDate = LocalDate.parse(scanner.nextLine().trim());
+                        filterTransactionsByDate(startDate, endDate);
 
                         break;
 
                     case "2":
                         System.out.println("Enter the Vendor Name:");
-                        String vendor = scanner.nextLine().trim(); //need to fix
+
+                        String vendor = scanner.nextLine().trim();//need to fix
+
                         filterTransactionsByVendor(vendor);
 
                         break;
 
                     case "3":
+                        //description
+                        String description = scanner.nextLine.trim();
+                        filterTransactionsByDescription
 
                         break;
 
@@ -452,20 +466,26 @@ public class FinancialTracker {
             }
         }
 
-        private static void filterTransactionsByCustomSearch () {
+        private static void filterTransactionsByDescription(String description) {
 
             //Checking if any results were found
             boolean results = false;
             try {
                 //Loop through all transactions in list
                 for (Transaction transaction : transactions) {
-                    if () {
+                    if (transaction.getDescription().equalsIgnoreCase(description)) {
+                        System.out.println(transaction);
+
+                        results = true;
+                    }
 
                     }
+                if (!results){
+                    System.out.println("No transactions were found with the description: " + description);
+                }
                 } catch(Exception e){
                     e.printStackTrace();
                 }
             }
 
-        }
     }
