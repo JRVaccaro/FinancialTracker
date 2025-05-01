@@ -87,6 +87,7 @@ public class FinancialTracker {
         }
 
     }
+
     //Method to add deposits into file
     private static void addDeposit(Scanner scanner) {
         try {
@@ -358,6 +359,7 @@ public class FinancialTracker {
             }
         }
     }
+
     //Method to filter transactions by date
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
 
@@ -406,86 +408,95 @@ public class FinancialTracker {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        private static void customSearchMenu(Scanner scanner){
-            boolean running = true;
+    private static void customSearchMenu(Scanner scanner) {
 
-            while (running) {
+        boolean running = true;
 
-                System.out.println("Custom Search");
-                System.out.println("Choose an option:");
-                System.out.println("1) Search by Date Range");
-                System.out.println("2) Search by Vendor");
-                System.out.println("3) Search by Description");
-                System.out.println("4) Search by Amount");
-                System.out.println("0) Back");
+        while (running) {
 
-                String input = scanner.nextLine().trim();
+            System.out.println("Custom Search");
+            System.out.println("Choose an option:");
+            System.out.println("1) Search by Date Range");
+            System.out.println("2) Search by Vendor");
+            System.out.println("3) Search by Description");
+            System.out.println("4) Search by Amount");
+            System.out.println("0) Back");
 
-                switch (input) {
-                    case "1":
-                        //Date range for custom search
-                        System.out.println("Enter the Start Date (yyyy-MM-dd): ");
+            String input = scanner.nextLine().trim();
 
-                        LocalDate startDate = LocalDate.parse(scanner.nextLine().trim());
+            switch (input) {
+                case "1":
+                    //Date range for custom search
+                    System.out.println("Enter the Start Date (yyyy-MM-dd): ");
 
-                        System.out.println("Enter the End Date (yyyy-MM-dd): ");
+                    LocalDate startDate = LocalDate.parse(scanner.nextLine().trim());
 
-                        LocalDate endDate = LocalDate.parse(scanner.nextLine().trim());
-                        filterTransactionsByDate(startDate, endDate);
+                    System.out.println("Enter the End Date (yyyy-MM-dd): ");
 
-                        break;
+                    LocalDate endDate = LocalDate.parse(scanner.nextLine().trim());
+                    filterTransactionsByDate(startDate, endDate);
 
-                    case "2":
-                        System.out.println("Enter the Vendor Name:");
+                    break;
 
-                        String vendor = scanner.nextLine().trim();//need to fix
+                case "2":
+                    System.out.println("Enter the Vendor Name:");
 
-                        filterTransactionsByVendor(vendor);
+                    String vendor = scanner.nextLine().trim(); //user input
 
-                        break;
+                    filterTransactionsByVendor(vendor);
 
-                    case "3":
-                        //description
-                        String description = scanner.nextLine.trim();
-                        filterTransactionsByDescription
+                    break;
 
-                        break;
+                case "3":
+                    //description
+                    System.out.println("Enter the Description: ");
 
-                    case "4":
-                        break;
+                    String description = scanner.nextLine().trim(); //user input
 
-                    case "0":
-                        running = false;
-                        break;
+                    filterTransactionsByDescription(description);
 
-                    default:
-                        System.out.println("Invalid option");
-                        break;
-                }
+                    break;
+
+                case "4":
+                    //amount
+                    break;
+
+                case "0":
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid option");
+                    break;
             }
         }
+    }
 
-        private static void filterTransactionsByDescription(String description) {
+    private static void filterTransactionsByDescription(String description) {
 
-            //Checking if any results were found
-            boolean results = false;
-            try {
-                //Loop through all transactions in list
-                for (Transaction transaction : transactions) {
-                    if (transaction.getDescription().equalsIgnoreCase(description)) {
-                        System.out.println(transaction);
+        //Checking if any results were found
+        boolean results = false;
+        try {
+            //Loop through all transactions in list
+            for (Transaction transaction : transactions) {
+                if (transaction.getDescription().equalsIgnoreCase(description)) {
+                    System.out.println(transaction);
 
-                        results = true;
-                    }
-
-                    }
-                if (!results){
-                    System.out.println("No transactions were found with the description: " + description);
+                    results = true;
                 }
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
+
             }
+            if (!results) {
+                System.out.println("No transactions were found with the description: " + description);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    private static void filterTransactionsByAmount(double amount) {
 
+        boolean results = false;
+}
     }
