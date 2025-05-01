@@ -35,7 +35,7 @@ public class FinancialTracker {
     public static void main(String[] args) {
         loadTransactions(FILE_NAME); //Loads transactions from the file
 
-        Collections.sort(transactions, Comparator.comparing(Transaction::getDate)); //sorts transactions by date
+        Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed()); //sorts transactions by date, with reversed it will do newest to oldest
 
         //Creates a scanner object to read user input
         Scanner scanner = new Scanner(System.in);
@@ -106,10 +106,14 @@ public class FinancialTracker {
             }
             br.close(); //closing reader after loop
 
+            //sorts transactions by date, with reversed it will do newest to oldest
+            Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed());
+
         } catch (Exception e) {
             System.out.println("Error has occurred!"); //if any errors happen, print message
             // print stack trace if exception occurs
             e.printStackTrace();
+
 
         }
 
@@ -159,16 +163,36 @@ public class FinancialTracker {
 
     //Method to add payments to file
     private static void addPayment(Scanner scanner) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true)); //By adding true it keeps existing data and puts new transaction at the bottom
+        LocalDate date = LocalDate.now(); //defaults to current date
+        LocalTime time = LocalTime.now(); //defaults to current time
 
-            System.out.println("Please enter the date and time in the following format: (yyyy-MM-dd HH:mm:ss)");
-            String dateTimeInput2 = scanner.nextLine().trim(); //read and trims the input
 
-            String[] parts = dateTimeInput2.split(" "); //splits the input into date and time parts
-            LocalDate date = LocalDate.parse(parts[0], DATE_FORMATTER); // parse date string using custom formatter
-            LocalTime time = LocalTime.parse(parts[1], TIME_FORMATTER);// parse time using custom formatter
+        //checks if a valid date and time have been entered
+        boolean correctDateTime = false;
 
+
+        //Loop until valid date and time input
+        while(!correctDateTime) {
+
+            try {
+                System.out.println("Please enter the Date and Time in the following format: (yyyy-MM-dd HH:mm:ss)");
+                String dateTimeInput = scanner.nextLine().trim(); //read and trims the input
+
+                String[] parts = dateTimeInput.split(" "); //splits the input into date and time parts
+                date = LocalDate.parse(parts[0], DATE_FORMATTER); // parse date string using custom formatter
+                time = LocalTime.parse(parts[1], TIME_FORMATTER);// parse time using custom formatter
+
+                //Exit loop if no error
+                correctDateTime = true;
+
+            } catch (Exception e) {
+                //if error occurs, loop again
+                System.out.println("Invalid Date and Time format. Please try again.");
+            }
+
+        }
+
+        try{
             System.out.println("Enter the description:  ");
             String description = scanner.nextLine().trim(); //reads description
 
@@ -189,6 +213,7 @@ public class FinancialTracker {
             transactions.add(newPayment); //adds the transaction to the list
             System.out.println("Payment added successfully!");
 
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true)); //By adding true it keeps existing data and puts new transaction at the bottom
             String line = newPayment.toString(); //call toString method on the newPayment
             writer.write(line); //writes the string of the current transaction
             writer.newLine(); // clearing line
@@ -280,6 +305,8 @@ public class FinancialTracker {
                 }
 
             }
+            //sorts transactions by date, with reversed it will do newest to oldest
+            Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed());
 
         } catch (Exception e) {
             System.out.println("Error has occurred while displaying deposits.");
