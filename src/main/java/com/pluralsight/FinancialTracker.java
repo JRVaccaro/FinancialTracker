@@ -70,7 +70,7 @@ public class FinancialTracker {
                     //Calling method to open ledger
                     ledgerMenu(scanner);
                     break;
-                    //Exits application
+                //Exits application
                 case "X":
                     System.out.println("Exiting from application!");
                     running = false;
@@ -322,7 +322,7 @@ public class FinancialTracker {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
-            System.out.println("6) Custom Search");
+            System.out.println("6) Custom Search"); //////
             System.out.println("0) Back");
 
 
@@ -385,8 +385,9 @@ public class FinancialTracker {
 
                     break;
                 case "6":
+                    customSearch(scanner);
                     //this will be for custom search
-                    customSearchMenu(scanner);
+                  //  customSearchMenu(scanner); This is what I had originally for first attempt at challenge, it would take the user to a new sub menu
                     break;
 
                 case "0":
@@ -452,7 +453,29 @@ public class FinancialTracker {
             e.printStackTrace();
         }
     }
+    private static void customSearch(Scanner scanner){
+        System.out.println("Custom Search");
 
+        System.out.println("Enter the Start Date (yyyy-MM-dd) Or press enter to skip!");
+        String startDate = scanner.nextLine().trim();
+
+        System.out.println("Enter the End Date (yyyy-MM-dd) Or press enter to skip!");
+        String endDate = scanner.nextLine().trim();
+
+        System.out.println("Enter the Description or press enter to skip!");
+        String description = scanner.nextLine().trim();
+
+        System.out.println("Enter the Vendor or press enter to skip!");
+        String vendor = scanner.nextLine().trim();
+
+        System.out.println("Enter the Amount or press enter to skip!");
+        String amountInput =scanner.nextLine().trim();
+        
+
+
+    //Below was my first attempt at the challenge, but I misunderstood it!
+ /*
+    //Method for custom search menu
     private static void customSearchMenu(Scanner scanner) {
         //Starts loop by setting it to true
         boolean running = true;
@@ -591,5 +614,7 @@ public class FinancialTracker {
             // print stack trace if exception occurs
             e.printStackTrace();
         }
+
+  */
     }
 }
