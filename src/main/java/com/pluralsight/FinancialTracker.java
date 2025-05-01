@@ -453,14 +453,14 @@ public class FinancialTracker {
             e.printStackTrace();
         }
     }
-    private static void customSearch(Scanner scanner){
+    private static void customSearch(Scanner scanner) {
         System.out.println("Custom Search");
 
         System.out.println("Enter the Start Date (yyyy-MM-dd) Or press enter to skip!");
-        String startDate = scanner.nextLine().trim();
+        String startDateInput = scanner.nextLine().trim();
 
         System.out.println("Enter the End Date (yyyy-MM-dd) Or press enter to skip!");
-        String endDate = scanner.nextLine().trim();
+        String endDateInput = scanner.nextLine().trim();
 
         System.out.println("Enter the Description or press enter to skip!");
         String description = scanner.nextLine().trim();
@@ -469,10 +469,66 @@ public class FinancialTracker {
         String vendor = scanner.nextLine().trim();
 
         System.out.println("Enter the Amount or press enter to skip!");
-        String amountInput =scanner.nextLine().trim();
-        
+        String amountInput = scanner.nextLine().trim();
 
+        boolean results = false;
 
+        try {
+            //Loop through each transaction in list
+            for (Transaction transaction : transactions) {
+
+                //if start date input is not empty
+                if (!startDateInput.isEmpty()) {
+
+                    //parse the start date from input string into LocalDate object
+                    LocalDate startDate = LocalDate.parse(startDateInput, DATE_FORMATTER);
+                    //Checks if transaction date is before the input start date
+                    if (transaction.getDate().isBefore(startDate))
+                        //Skips this and moves onto next part of loop
+                        continue;
+                }
+                //if end date input is not empty
+                if (!endDateInput.isEmpty()) {
+                    //parse the end date from input string into LocalDate Object
+                    LocalDate endDate = LocalDate.parse(endDateInput, DATE_FORMATTER);
+                    //checks if transaction date is after the input end date
+                    if (transaction.getDate().isAfter(endDate))
+                        //skips this and moves onto next part of loop
+                        continue;
+                }
+                //if input entered a description AND the transaction's description does NOT match
+                if (!description.isEmpty() && !transaction.getDescription().equalsIgnoreCase(description))
+                    //skips this and moves onto next part of loop
+                    continue;
+
+                //if input entered a vendor AND the transaction's vendor does NOT match
+                if (!vendor.isEmpty() && !transaction.getVendor().equalsIgnoreCase(vendor))
+                    //skips this and moves onto the next part of the loop
+                    continue;
+
+                //if input entered is an amount
+                if (!amountInput.isEmpty()) {
+                    //change input from a string to a double
+                    double amount = Double.parseDouble(amountInput);
+                    //if transaction amount does NOT match entered amount
+                    if (transaction.getAmount() != amount)
+                        //skips this and moves onto next part of the loop
+                        continue;
+                }
+                //if all checks pass, print transaction
+                System.out.println(transaction);
+                results = true;
+            }
+            //after checking all transactions and no matching results were found
+            if (!results) {
+                System.out.println("No transactions matched your search.");
+
+            }
+            //catch any exceptions
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please try again.");
+        }
+    }
     //Below was my first attempt at the challenge, but I misunderstood it!
  /*
     //Method for custom search menu
@@ -617,4 +673,4 @@ public class FinancialTracker {
 
   */
     }
-}
+
