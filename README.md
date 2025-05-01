@@ -2,7 +2,7 @@
 
 ## Description of the Project
 
-Financial Tracker is a Java console application that helps users manage their personal finances. Users can add deposits, make payments, view transaction history through a ledger, and generate simple reports. It's designed for individuals who want a lightweight way to track their income and expenses without a complex interface.
+Financial Tracker is a simple Java console app that lets users keep track of their personal finances. You can add deposits, make payments, check your transaction history in a ledger, and run basic reports. It's perfect for anyone who wants an easy way to track income and expenses without a complicated interface
 
 ## User Stories
 

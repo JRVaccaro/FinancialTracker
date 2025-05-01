@@ -9,23 +9,41 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+//Main class
 public class FinancialTracker {
+    //list to store all transaction records
     private static ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
+    //constant for file name where transaction data is stored
     private static final String FILE_NAME = "transactions.csv";
+
+    //Constant for date format
     private static final String DATE_FORMAT = "yyyy-MM-dd";
+
+    //constant for time format
     private static final String TIME_FORMAT = "HH:mm:ss";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT); //changed to public so i can access it in my Transaction class for toString
+
+    //changed to public so i can access it in my Transaction class for toString
+    //To format and parse dates based on date format constant
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
+
+    //changed to public so i can access it in my Transaction class for toString
+    //to format and parse times based on the time format constant
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern(TIME_FORMAT);//changed to public so i can access it in my Transaction class for toString
 
+    //Main method entry point in application
     public static void main(String[] args) {
         loadTransactions(FILE_NAME); //Loads transactions from the file
 
         Collections.sort(transactions, Comparator.comparing(Transaction::getDate)); //sorts transactions by date
 
-
+        //Creates a scanner object to read user input
         Scanner scanner = new Scanner(System.in);
+
+        //Starts loop by setting it to true
         boolean running = true;
 
+        //loop to keep displaying the menu
         while (running) {
             System.out.println("Welcome to TransactionApp");
             System.out.println("Choose an option:");
@@ -34,28 +52,36 @@ public class FinancialTracker {
             System.out.println("L) Ledger");
             System.out.println("X) Exit");
 
+            //reads user's input and removes extra spaces
             String input = scanner.nextLine().trim();
 
+
+            //Switch statement to handle user input
             switch (input.toUpperCase()) {
                 case "D":
+                    //Calling method to add a deposit
                     addDeposit(scanner);
                     break;
                 case "P":
+                    //calling method to add a payment
                     addPayment(scanner);
                     break;
                 case "L":
+                    //Calling method to open ledger
                     ledgerMenu(scanner);
                     break;
+                    //Exits application
                 case "X":
                     System.out.println("Exiting from application!");
                     running = false;
                     break;
                 default:
+                    //handles invalid options
                     System.out.println("Invalid option");
                     break;
             }
         }
-
+        //closing scanner
         scanner.close();
     }
 
@@ -82,6 +108,7 @@ public class FinancialTracker {
 
         } catch (Exception e) {
             System.out.println("Error has occurred!"); //if any errors happen, print message
+            // print stack trace if exception occurs
             e.printStackTrace();
 
         }
@@ -171,12 +198,16 @@ public class FinancialTracker {
 
         } catch (Exception e) {
             System.out.println("Invalid input.");
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
 
     private static void ledgerMenu(Scanner scanner) {
+        //Starts loop by setting it to true
         boolean running = true;
+
+        //loop to keep displaying the menu
         while (running) {
             System.out.println("Ledger");
             System.out.println("Choose an option:");
@@ -186,6 +217,7 @@ public class FinancialTracker {
             System.out.println("R) Reports");
             System.out.println("H) Home");
 
+            //reads user input for the selected search option
             String input = scanner.nextLine().trim();
 
             switch (input.toUpperCase()) {
@@ -227,6 +259,7 @@ public class FinancialTracker {
                         transaction.getDate().format(DATE_FORMATTER), transaction.getTime().format(TIME_FORMATTER), transaction.getDescription(), transaction.getVendor(), transaction.getAmount());
             }
         } catch (Exception e) {
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
@@ -250,6 +283,7 @@ public class FinancialTracker {
 
         } catch (Exception e) {
             System.out.println("Error has occurred while displaying deposits.");
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
@@ -270,12 +304,16 @@ public class FinancialTracker {
                 }
             }
         } catch (Exception e) {
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
 
     private static void reportsMenu(Scanner scanner) {
+        //Starts loop by setting it to true
         boolean running = true;
+
+        //loop to keep displaying the menu
         while (running) {
             System.out.println("Reports");
             System.out.println("Choose an option:");
@@ -287,6 +325,8 @@ public class FinancialTracker {
             System.out.println("6) Custom Search");
             System.out.println("0) Back");
 
+
+            //reads user input for the selected search option
             String input = scanner.nextLine().trim();
 
             switch (input) {
@@ -350,6 +390,7 @@ public class FinancialTracker {
                     break;
 
                 case "0":
+                    //Exit the loop
                     running = false;
                     break;
 
@@ -381,6 +422,7 @@ public class FinancialTracker {
             }
 
         } catch (Exception e) {
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
@@ -406,16 +448,19 @@ public class FinancialTracker {
                 System.out.println("No transactions were found for vendor: " + vendor);
             }
         } catch (Exception e) {
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
 
     private static void customSearchMenu(Scanner scanner) {
-
+        //Starts loop by setting it to true
         boolean running = true;
 
+        //loop to keep displaying the menu
         while (running) {
 
+            //displaying custom search menu option
             System.out.println("Custom Search");
             System.out.println("Choose an option:");
             System.out.println("1) Search by Date Range");
@@ -424,20 +469,27 @@ public class FinancialTracker {
             System.out.println("4) Search by Amount");
             System.out.println("0) Back");
 
+            //reads user input for the selected search option
             String input = scanner.nextLine().trim();
 
             switch (input) {
                 case "1":
-                    //Date range for custom search
+                    //asks user for custom date range
                     try {
                         System.out.println("Enter the Start Date (yyyy-MM-dd): ");
 
+                        //parse the start date from user input
                         LocalDate startDate = LocalDate.parse(scanner.nextLine().trim(), DATE_FORMATTER);
 
                         System.out.println("Enter the End Date (yyyy-MM-dd): ");
 
+                        //parse end date from user input
                         LocalDate endDate = LocalDate.parse(scanner.nextLine().trim(),DATE_FORMATTER);
+
+                        //Calling method to filter transactions by date
                         filterTransactionsByDate(startDate, endDate);
+
+                    //Print error message if date entered is invalid
                     } catch (Exception e) {
                         System.out.println("Invalid date format. Please use yyyy-MM-dd");
                     }
@@ -445,42 +497,53 @@ public class FinancialTracker {
                     break;
 
                 case "2":
+                    //asks user for vendor name
                     System.out.println("Enter the Vendor Name:");
 
-                    String vendor = scanner.nextLine().trim(); //user input
+                    //takes user input for vendor name
+                    String vendor = scanner.nextLine().trim();
 
+                    //Calling method to filter transactions by vendor
                     filterTransactionsByVendor(vendor);
 
                     break;
 
                 case "3":
-                    //description
+                    //Asks user for custom description
                     System.out.println("Enter the Description: ");
 
-                    String description = scanner.nextLine().trim(); //user input
+                    //takes user input for description
+                    String description = scanner.nextLine().trim();
 
+                    //Calling method to filter transactions by description
                     filterTransactionsByDescription(description);
 
                     break;
 
                 case "4":
-                    //amount
+                    //Asks user for custom amount
                     System.out.println("Enter the Amount: ");
+
+                    //parse amount from user input as a double
                     double amount = Double.parseDouble(scanner.nextLine().trim());
+
+                    //calling method to filter transactions by amount
                     filterTransactionsByAmount(amount);
                     break;
 
                 case "0":
+                    //Exit the loop
                     running = false;
                     break;
 
                 default:
+                    //prints message if user selects invalid option
                     System.out.println("Invalid option");
                     break;
             }
         }
     }
-
+//Method for filtering transactions by description
     private static void filterTransactionsByDescription(String description) {
 
         //Checking if any results were found
@@ -495,31 +558,37 @@ public class FinancialTracker {
                 }
 
             }
+            //if no matching transactions were found, print message
             if (!results) {
                 System.out.println("No transactions were found with the description: " + description);
             }
         } catch (Exception e) {
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
 
+    //Method for filtering transactions by amount
     private static void filterTransactionsByAmount(double amount) {
         //Checking if any results were found
         boolean results = false;
         try {
             //Loop through all transactions in list
             for (Transaction transaction : transactions) {
+                //Checks if the transaction amount matches input amount
                 if (transaction.getAmount() == amount) {
                     System.out.println(transaction);
 
+                    //changes to true is match is found
                     results = true;
                 }
             }
-
+            // if no matching transactions amount were found
             if (!results) {
                 System.out.println("No transactions were found with the amount: " + amount);
             }
         } catch (Exception e) {
+            // print stack trace if exception occurs
             e.printStackTrace();
         }
     }
