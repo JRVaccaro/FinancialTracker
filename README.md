@@ -19,10 +19,10 @@ Financial Tracker is a Java console application that helps users manage their pe
 ## Setup
 **Using the Application**
 You will be prompted to pick from the following:
-D) Add Deposit
-P) Make Payment (Debit)
-L) Ledger
-X) Exit
+- D) Add Deposit
+- P) Make Payment (Debit)
+- L) Ledger
+- X) Exit
 - Adding a deposit allows user to record money being added to their account.
 - Adding a payment allows user to record money being spent or withdrawn.
 - The ledger will open a submenu where users can view and filter their transaction history
