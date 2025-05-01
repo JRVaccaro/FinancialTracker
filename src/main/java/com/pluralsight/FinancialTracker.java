@@ -429,14 +429,18 @@ public class FinancialTracker {
             switch (input) {
                 case "1":
                     //Date range for custom search
-                    System.out.println("Enter the Start Date (yyyy-MM-dd): ");
+                    try {
+                        System.out.println("Enter the Start Date (yyyy-MM-dd): ");
 
-                    LocalDate startDate = LocalDate.parse(scanner.nextLine().trim());
+                        LocalDate startDate = LocalDate.parse(scanner.nextLine().trim(), DATE_FORMATTER);
 
-                    System.out.println("Enter the End Date (yyyy-MM-dd): ");
+                        System.out.println("Enter the End Date (yyyy-MM-dd): ");
 
-                    LocalDate endDate = LocalDate.parse(scanner.nextLine().trim());
-                    filterTransactionsByDate(startDate, endDate);
+                        LocalDate endDate = LocalDate.parse(scanner.nextLine().trim(),DATE_FORMATTER);
+                        filterTransactionsByDate(startDate, endDate);
+                    } catch (Exception e) {
+                        System.out.println("Invalid date format. Please use yyyy-MM-dd");
+                    }
 
                     break;
 
@@ -461,6 +465,9 @@ public class FinancialTracker {
 
                 case "4":
                     //amount
+                    System.out.println("Enter the Amount: ");
+                    double amount = Double.parseDouble(scanner.nextLine().trim());
+                    filterTransactionsByAmount(amount);
                     break;
 
                 case "0":
@@ -495,8 +502,25 @@ public class FinancialTracker {
             e.printStackTrace();
         }
     }
-    private static void filterTransactionsByAmount(double amount) {
 
+    private static void filterTransactionsByAmount(double amount) {
+        //Checking if any results were found
         boolean results = false;
-}
+        try {
+            //Loop through all transactions in list
+            for (Transaction transaction : transactions) {
+                if (transaction.getAmount() == amount) {
+                    System.out.println(transaction);
+
+                    results = true;
+                }
+            }
+
+            if (!results) {
+                System.out.println("No transactions were found with the amount: " + amount);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+}

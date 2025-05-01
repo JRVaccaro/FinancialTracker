@@ -12,6 +12,7 @@ Financial Tracker is a Java console application that helps users manage their pe
 - As a user, I want to access reports from the ledger, so that I can run summaries and searches.
 - As a user, I want to filter transactions by date, so that I can review activity during a selected period.
 - As a user, I want to search for transactions by vendor, so that I can quickly find related expenses or income.
+- As a user, I want to use a custom search so that I can specifically filter through my transactions based on criteria I choose.
 - As a user, I want to have an exit option in the menu, so I can close the application when I’m finished.
 
 
