@@ -50,22 +50,14 @@ Follow these steps to get your application running within IntelliJ IDEA:
 - Intellij IDEA
 
 ## Demo
-![screen 1.png](screen%201.png)
-![Screen 2.png](Screen%202.png)
-![screen 3.png](screen%203.png)
-![screen 4.png](screen%204.png)
-![screen 5.png](screen%205.png)
-![screen 6.png](screen%206.png)
-![screen 7.png](screen%207.png)
-![screen 8.png](screen%208.png)
-![screen 9.png](screen%209.png)
-![screen 10.png](screen%2010.png)
-![screen 11.png](screen%2011.png)
-![screen 12.png](screen%2012.png)
-![screen 13.png](screen%2013.png)
-![screen 14.png](screen%2014.png)
-![screen 15.png](screen%2015.png)
-![screen 16.png](screen%2016.png)
+![Better Screen 1.png](Better%20Screen%201.png)
+![better screen 2.png](better%20screen%202.png)
+![better screen 3.png](better%20screen%203.png)
+![better screen 4.png](better%20screen%204.png)
+![better screen 5.png](better%20screen%205.png)
+![better screen 6.png](better%20screen%206.png)
+![better screen 7.png](better%20screen%207.png)
+![Better Screen 8.png](Better%20Screen%208.png)
 
 ## Future Work
 - Improve the visual design of the application to make it more user-friendly and snazzier-looking.
