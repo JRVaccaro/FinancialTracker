@@ -358,7 +358,7 @@ public class FinancialTracker {
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
-            System.out.println("6) Custom Search"); //////
+            System.out.println("6) Custom Search");
             System.out.println("0) Back");
 
 
@@ -392,7 +392,7 @@ public class FinancialTracker {
                     //Gets first day of current year
                     LocalDate startOfYear = LocalDate.now().withDayOfYear(1);
 
-                    //Gets todays date as end of range
+                    //Gets today's date as end of range
                     LocalDate endOfYear = LocalDate.now();
 
                     //Filters and prints transactions that occurred from start of year to today
