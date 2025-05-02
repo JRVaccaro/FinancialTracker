@@ -51,8 +51,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Demo
 
-![Demo capstone.gif](Gif for Demo/Demo%20capstone.gif)
-
+![Demo capstone.gif](Gif%20for%20Demo/Demo%20capstone.gif)
 ## Future Work
 - Improve error handling to prevent crashes and provide clear feedback when something goes wrong.
 - Improve the visual design of the application to make it more user-friendly and snazzier-looking.
