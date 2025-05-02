@@ -174,6 +174,8 @@ public class FinancialTracker {
         //Loop until valid date and time input
         while(!correctDateTime) {
 
+
+            //This try is for validating date and time
             try {
                 System.out.println("Please enter the Date and Time in the following format: (yyyy-MM-dd HH:mm:ss)");
                 String dateTimeInput = scanner.nextLine().trim(); //read and trims the input
@@ -192,6 +194,7 @@ public class FinancialTracker {
 
         }
 
+        //This try is for handling input and file writing
         try{
             System.out.println("Enter the description:  ");
             String description = scanner.nextLine().trim(); //reads description

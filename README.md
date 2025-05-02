@@ -50,26 +50,20 @@ Follow these steps to get your application running within IntelliJ IDEA:
 - Intellij IDEA
 
 ## Demo
-![Better Screen 1.png](Better%20Screen%201.png)
-![better screen 2.png](better%20screen%202.png)
-![better screen 3.png](better%20screen%203.png)
-![better screen 4.png](better%20screen%204.png)
-![better screen 5.png](better%20screen%205.png)
-![better screen 6.png](better%20screen%206.png)
-![better screen 7.png](better%20screen%207.png)
-![Better Screen 8.png](Better%20Screen%208.png)
+
+![Demo capstone.gif](Gif for Demo/Demo%20capstone.gif)
 
 ## Future Work
+- Improve error handling to prevent crashes and provide clear feedback when something goes wrong.
 - Improve the visual design of the application to make it more user-friendly and snazzier-looking.
 - Add authentication, would like to include a login functionality to support multiple users.
-- Budgeting features, allow users to set budgets and get alerts when needed.
 - Mobile version, adapt the application for mobile platforms.
 
 
 ## Resources
-- https://www.geeksforgeeks.org/
-- https://stackoverflow.com/questions
-- https://github.com/RayMaroun
+- [ChatGPT](https://openai.com/chatgpt) by OpenAI – for assistance with coding guidance, debugging, and understanding Java concepts.
+- [GeeksforGeeks](https://www.geeksforgeeks.org/) – for reference articles and tutorials that helped deepen my understanding of programming topics.
+- [Ray Maroun's GitHub](https://github.com/RayMaroun) – for code examples and guidance throughout the project.
 
 ## Author
 - **Julianna Vaccaro** -Developed this project as part of Java programming course to practice file handling, user input, and menu-driven applications.
