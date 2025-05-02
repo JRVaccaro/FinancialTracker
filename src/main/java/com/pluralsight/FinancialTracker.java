@@ -156,6 +156,9 @@ public class FinancialTracker {
 
             writer.close(); //closes writer
 
+            //sorts transactions by date, with reversed it will do newest to oldest
+            Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed());
+
         } catch (Exception e) {
             System.out.println("Invalid. Try again!");
         }
@@ -186,6 +189,9 @@ public class FinancialTracker {
 
                 //Exit loop if no error
                 correctDateTime = true;
+
+                //sorts transactions by date, with reversed it will do newest to oldest
+                Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed());
 
             } catch (Exception e) {
                 //if error occurs, loop again
